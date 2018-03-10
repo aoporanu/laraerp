@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSupplier;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -36,10 +37,10 @@ class SuppliersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreSupplier $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(StoreSupplier $request)
     {
         //
     }

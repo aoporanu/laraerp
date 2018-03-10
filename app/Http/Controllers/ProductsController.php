@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\StoreProduct;
 use App\Product;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -24,18 +27,20 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $suppliers = Supplier::pluck('id', 'name');
+        $categories = Category::pluck('id', 'name');
+        return view('products.create', ['suppliers' => $suppliers, 'categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProduct $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        //
+        dd($request);
     }
 
     /**

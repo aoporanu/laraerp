@@ -28,3 +28,5 @@ Route::get('supplier/any', 'SuppliersController@anyData')->name('suppliers.datat
 Route::get('products', 'ProductsController@index')->name('products.index');
 
 Route::get('products/create', 'ProductsController@create')->name('products.create');
+
+Route::post('products/store', 'ProductsController@store')->name('products.store');

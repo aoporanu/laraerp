@@ -29,7 +29,9 @@
                                     <td>{{ $product->price }}</td>
                                     <td></td>
                                     <td>{{ $product->created_at }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('product.add.to.cart', ['id' => $product->id]) }}">Add to cart</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

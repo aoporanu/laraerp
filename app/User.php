@@ -8,7 +8,7 @@ use Amsgames\LaravelShop\Traits\ShopUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, ShopUserTrait;
+    use Notifiable, ShopUserTrait, \Illuminate\Auth\Authenticatable;
 
     /**
      * The attributes that are mass assignable.

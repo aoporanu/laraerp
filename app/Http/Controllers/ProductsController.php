@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Category;
 use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Supplier;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -85,17 +87,34 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        return redirect()->route('products.index')->with('message', 'The product has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
+     * @throws Exception
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            $product->delete();
+        } catch (Exception $e) {
+            return redirect()->route('products.index')->with('message', $e->getMessage());
+        }
+
+        return redirect()->route('products.index')->with('message', 'The product has been deleted');
+    }
+
+    /**
+     * @param $id
+     */
+    public function cart($id)
+    {
+        $cart = Cart::findByUser(1);
+        dump($cart);
+        $cart->add(Product::find($id));
     }
 }

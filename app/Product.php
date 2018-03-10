@@ -9,8 +9,6 @@ class Product extends Model
 {
     use ShopItemTrait;
 
-    protected $itemName = 'product_name';
-
     protected $itemRouteName = 'product';
 
     protected $itemRouteParams = ['slug'];

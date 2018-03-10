@@ -30,3 +30,9 @@ Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('products/create', 'ProductsController@create')->name('products.create');
 
 Route::post('products/store', 'ProductsController@store')->name('products.store');
+
+Route::get('product/delete/{id}', 'ProductsController@destroy')->name('products.destroy');
+
+Route::get('products/show/{id}', 'ProductsController@show')->name('products.show');
+
+Route::get('product/cart/{id}', 'ProductsController@cart')->name('product.add.to.cart');

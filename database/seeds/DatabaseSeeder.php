@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         $this->call(LaravelShopSeeder::class);
         $this->call(SupplierSeeder::class);
+        $this->call(CategoriesSeeder::class);
         Model::reguard();
     }
 }

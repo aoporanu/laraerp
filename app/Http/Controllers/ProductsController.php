@@ -17,7 +17,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products.index', ['products' => Product::all()]);
+        return view('products.index', ['products' => Product::with('category')->get()]);
     }
 
     /**
@@ -40,7 +40,18 @@ class ProductsController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        dd($request);
+//        dd($request->all());
+        $category = Category::findOrFail($request->get('category_id'));
+        $supplier = Supplier::find($request->get('supplier_id'));
+
+        $product = new Product;
+
+        $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->sku = 10100008;
+        $category->product()->save($product);
+
+        return redirect()->route('products.index')->with('message', 'The product has been saved');
     }
 
     /**

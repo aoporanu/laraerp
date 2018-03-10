@@ -28,7 +28,9 @@ class StoreProduct extends FormRequest
             'name' => 'required',
             'category_id' => 'required',
             'supplier_id' => 'required',
-            'price' => 'required|numeric|between 0.00,13.000',
+            'price' => 'required|numeric|between:0.00,13.000',
+            'weight' => 'required',
+            'packaging' => 'required',
         ];
     }
 }

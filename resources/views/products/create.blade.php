@@ -8,13 +8,11 @@
                 <div class="card">
                     <div class="card-header">Create Product</div>
                     <div class="card-body">
-                        {{ dump($suppliers) }}
                         <form action="{{ route('products.store') }}" class="form-horizontal" method="post">
                             <input type="hidden" value="{{ csrf_token() }}" name="_token">
                             <div class="form-group row">
                                 <label for="name" class="col-form-label">Product name:</label>
                                 <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid': '' }}" id="name" name="name" value="{{ old('name') }}" />
-
                                 @if($errors->has('name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -46,6 +44,33 @@
                                 @if($errors->has('supplier_id'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('supplier_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="text" id="price" class="form-control" name="price" />
+                                @if($errors->has('price'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <label for="weight" class="form-label">{{ __('Weight') }}</label>
+                                <input type="text" id="weight" class="form-control" name="weight" />
+                                @if($errors->has('weight'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('weight') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <label for="packaging" class="control-label">{{ __('Packaging') }}</label>
+                                <input type="text" name="packaging" class="form-control" id="packaging" />
+                                @if($errors->has('packaging'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('packaging') }}</strong>
                                     </span>
                                 @endif
                             </div>

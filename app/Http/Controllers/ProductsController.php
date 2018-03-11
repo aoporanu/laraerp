@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use App\Category;
 use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Supplier;
 use Exception;
+use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -113,8 +113,10 @@ class ProductsController extends Controller
      */
     public function cart($id)
     {
-        $cart = Cart::findByUser(1);
+//        dd(Product::where);
+        $product = Product::findOrFail($id);
+//        dump($product);
+        $cart = Cart::add($product->id, $product->name, 1, $product->price);
         dump($cart);
-        $cart->add(Product::find($id));
     }
 }

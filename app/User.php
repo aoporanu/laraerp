@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Amsgames\LaravelShop\Traits\ShopUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, ShopUserTrait, \Illuminate\Auth\Authenticatable;
+    use Notifiable, \Illuminate\Auth\Authenticatable;
 
     /**
      * The attributes that are mass assignable.

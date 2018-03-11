@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Amsgames\LaravelShop\Traits\ShopItemTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use ShopItemTrait;
-
     protected $itemRouteName = 'product';
 
     protected $itemRouteParams = ['slug'];

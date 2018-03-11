@@ -159,7 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \Amsgames\LaravelShop\LaravelShopProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         \Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
@@ -209,8 +209,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Shop' => \Amsgames\LaravelShop\LaravelShopFacade::class,
         'Datatables' => \Yajra\DataTables\Facades\DataTables::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];

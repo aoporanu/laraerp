@@ -30,7 +30,7 @@ return [
     | Update the model if it is in a different namespace.
     |
     */
-    'cart' => 'App\Cart',
+    'cart' => 'App\Cart1',
 
     /*
     |--------------------------------------------------------------------------

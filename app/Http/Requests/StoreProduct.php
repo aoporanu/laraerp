@@ -26,8 +26,8 @@ class StoreProduct extends FormRequest
     {
         return [
             'name' => 'required',
-            'category_id' => 'required',
-            'supplier_id' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'supplier_id' => 'required|exists:suppliers,id',
             'price' => 'required|numeric|between:0.00,13.000',
             'weight' => 'required',
             'packaging' => 'required',

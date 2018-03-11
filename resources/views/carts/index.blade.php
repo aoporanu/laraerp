@@ -42,6 +42,15 @@
                                     <td>Total</td>
                                     <td><?php echo Cart::total(); ?></td>
                                 </tr>
+                            {{-- add link to display modal with promotions if the qty is equal or greater than the promotion qty for the given product --}}
+                            {{-- I have to pass a product, so I can get to $product->promotions()->mechanism --}}
+                                @if($row->qty >= $row->product->promotions()->mechanism)
+                                    <tr>
+                                        <td colspam="4">
+                                            <a href="#" id="add_promo_for_{{ $row->id }}">Add Promotion</a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </table>
                     </div>

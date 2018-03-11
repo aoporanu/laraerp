@@ -7,7 +7,7 @@ use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Supplier;
 use Exception;
-use Gloudemans\Shoppingcart\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -52,6 +52,7 @@ class ProductsController extends Controller
         $product->price = $request->get('price');
         $product->sku = 10100008;
         $category->product()->save($product);
+        $supplier->products()->save($product);
 
         return redirect()->route('products.index')->with('message', 'The product has been saved');
     }
@@ -109,7 +110,9 @@ class ProductsController extends Controller
     }
 
     /**
+     *
      * @param $id
+     * @return \Illuminate\Http\Response
      */
     public function cart($id)
     {
@@ -117,6 +120,7 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
 //        dump($product);
         $cart = Cart::add($product->id, $product->name, 1, $product->price);
-        dump($cart);
+
+        return redirect()->route('carts.index')->with('message', 'The product has been added to the cart');
     }
 }

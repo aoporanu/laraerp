@@ -14,11 +14,17 @@ class Order extends ShopOrderModel
         return $this->belongsTo(Client::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function receipt()
     {
         return $this->belongsTo(Receipt::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|mixed
+     */
     public function hasOne()
     {
         return $this->hasOne(Invoice::class);

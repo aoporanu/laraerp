@@ -1,10 +1,10 @@
-$<?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableProductsAddPromotion extends Migration
+class CreateMechanismsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AlterTableProductsAddPromotion extends Migration
      */
     public function up()
     {
-        Schema::table('promotions', function(Blueprint $table) {
-            $table->integer('product_id')->unsigned()->index()->nullable();
-            $table->foreign('product_id')->references('id')->on('products');
+        Schema::create('mechanisms', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('qty');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class AlterTableProductsAddPromotion extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('mechanisms');
     }
 }

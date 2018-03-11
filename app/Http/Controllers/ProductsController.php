@@ -119,7 +119,7 @@ class ProductsController extends Controller
 //        dd(Product::where);
         $product = Product::findOrFail($id);
 //        dump($product);
-        $cart = Cart::add($product->id, $product->name, 1, $product->price);
+        Cart::add($product->id, $product->name, 1, $product->price)->associate(Product::class);
 
         return redirect()->route('carts.index')->with('message', 'The product has been added to the cart');
     }

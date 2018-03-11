@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends Model implements Buyable
 {
     protected $itemRouteName = 'product';
 
@@ -21,5 +22,43 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function promotions()
+    {
+        return $this->hasMany(Promotion::class);
+    }
+
+    /**
+     * Get the identifier of the Buyable item.
+     *
+     * @return int|string
+     */
+    public function getBuyableIdentifier($options = null)
+    {
+        // TODO: Implement getBuyableIdentifier() method.
+    }
+
+    /**
+     * Get the description or title of the Buyable item.
+     *
+     * @return string
+     */
+    public function getBuyableDescription($options = null)
+    {
+        // TODO: Implement getBuyableDescription() method.
+    }
+
+    /**
+     * Get the price of the Buyable item.
+     *
+     * @return float
+     */
+    public function getBuyablePrice($options = null)
+    {
+        // TODO: Implement getBuyablePrice() method.
     }
 }

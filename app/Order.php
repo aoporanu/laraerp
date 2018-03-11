@@ -13,4 +13,14 @@ class Order extends ShopOrderModel
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function receipt()
+    {
+        return $this->belongsTo(Receipt::class);
+    }
+
+    public function hasOne()
+    {
+        return $this->hasOne(Invoice::class);
+    }
 }

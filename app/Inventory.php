@@ -14,5 +14,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Inventory extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'qty',
+        'weight',
+        'price',
+        'lot',
+        'for'
+    ];
 }

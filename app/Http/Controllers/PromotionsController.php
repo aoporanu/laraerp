@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Inventory;
 use App\Promotion;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -47,7 +48,7 @@ class PromotionsController extends Controller
      * @param $id
      * @return array
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $promotion = Promotion::findOrFail($id);
 
@@ -67,18 +68,16 @@ class PromotionsController extends Controller
         // check if product doesn't already have a promo price on it
         foreach(Cart::content() as $row) {
             if($row->model->promo_price != '') {
-//                return response that the given product already has a promo price on it
-                $response['message'] = __('promo_price_for_product');
+//                TODO return response that the given product already has a promo price on it
+                $response['message'] = __('promotions.promo_price_for_product');
             } elseif($row->model->promo_price == '') {
 //                return the promotions array
-                $response['message'] = __('available_promotions');
-                $response['products'] = SType::where([
-                    ['type', '=', 'free'],
-                    ['for', '=', $promotion->name]
-                ]);
+                $promo = Inventory::where([['type', '=', 'free'], ['for', '=', $promotion->name]])->get();
+                $response['message'] = __('promotions.available_promotions');
+                $response['promo'] = $promo;
             }
         }
-        return $response;
+        return response()->json($response);
     }
 
     /**

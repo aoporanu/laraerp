@@ -32,6 +32,7 @@
                                                 <a href="{{ route('promotions.show', ['id' => $row->id]) }}" id="" data-toggle="modal" data-target="#exampleModal" data-content="{{ $row->id }}" class="btn btn-outline-primary {{ $row->id }}">Add promo</a>
                                             </td>
                                         @endif
+                                        @break
                                     @endforeach
                                 </tr>
                                 <tr>
@@ -116,8 +117,17 @@
     <script type="text/javascript">
 
         $("#exampleModal").on("show.bs.modal", function(e) {
-                var link = $(e.relatedTarget);
-                $(this).find('.modal-body').load(link.attr("href"));
+            var link = $(e.relatedTarget);
+            // $(this).find('.modal-body').load(link.attr("href"));
+            $.getJSON(link.attr('href'), function (json) {
+                // console.log(json.qty);
+                // this is the right way to go about getting the promotions,
+                //     what needs to happen next is to get the response into a form,
+                //     probably with a spinner, and on each increment I should check if the value in the spinner matches
+                // the value in json.qty
+                $('.modal-body').html('<h3>' + json.message + ':</h3> ' + json.qty + '<br /><p><input id="spinner" class="form-control" value="0" /></p>');
+                $('#spinner').spinner();
+            });
         });
     </script>
 @endsection

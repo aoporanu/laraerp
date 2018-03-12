@@ -15,4 +15,12 @@ class Stock extends Model
     {
         return $this->hasMany(Supplier::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function type()
+    {
+        return $this->hasMany(SType::class);
+    }
 }

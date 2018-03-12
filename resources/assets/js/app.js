@@ -5,10 +5,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import $ from 'jquery';
+
+window.$ = window.jQuery = $;
+
+import 'jquery-ui/ui/widgets/spinner.js';
+
 require('./bootstrap');
 
 window.Vue = require('vue');
 
+$('#spinner').spinner();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

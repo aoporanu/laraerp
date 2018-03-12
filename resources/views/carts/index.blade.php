@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">Cart contents</div>
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-responsive">
                             <tr>
                                 <th>Product</th>
                                 <th>Qty</th>

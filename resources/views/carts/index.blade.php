@@ -97,8 +97,13 @@
                         var curr = ui.value;
                         // console.info(event);
                         // console.info(ui); // the max
-                        if(curr++) {
-
+                        if(this.value < json.qty) {
+                            console.info('Increment');
+                            // next of type spinner, set max value as
+                            var spinner = $(this).parent().next($('.spinner'));
+                            spinner.spinner({
+                                max: json.qty - this.value
+                            });
                         }
                     },
                     'icons': {

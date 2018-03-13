@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, \Illuminate\Auth\Authenticatable;
+    use Notifiable, \Illuminate\Auth\Authenticatable, EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -40,3 +40,5 @@ Route::get('product/cart/{id}', 'ProductsController@cart')->name('product.add.to
 Route::get('cart', 'CartsController@index')->name('carts.index');
 
 Route::get('promotions/show/{id}', 'PromotionsController@show')->name('promotions.show');
+
+Route::post('cart/addpromo', 'PromotionsController@addPromo')->name('cart.addpromo');

@@ -116,11 +116,10 @@ class ProductsController extends Controller
      */
     public function cart($id)
     {
-//        dd(Product::where);
         $product = Product::findOrFail($id);
-//        dump($product);
-        Cart::add($product->id, $product->name, 11, $product->price)->associate(Product::class);
+        Cart::add($product->id, $product->name, 55, $product->price)->associate(Product::class);
 
-        return redirect()->route('carts.index')->with('message', 'The product has been added to the cart');
+        return redirect()->route('carts.index')
+            ->with(['status' => 'OK', 'message' => 'The product has been added to the cart']);
     }
 }

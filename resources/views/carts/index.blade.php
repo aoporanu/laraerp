@@ -94,9 +94,12 @@
                     'min': 0,
                     'max': json.qty,
                     'spin': function (event, ui) {
+                        var curr = ui.value;
                         // console.info(event);
                         // console.info(ui); // the max
+                        if(curr++) {
 
+                        }
                     },
                     'icons': {
                         'up': 'fas fa-arrow-up',

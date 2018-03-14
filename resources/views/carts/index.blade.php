@@ -59,6 +59,8 @@
                             @endforeach
 
                         </table>
+                        <a href="{{ route('products.index') }}" class="btn btn-danger">{{ __('carts.continue_shopping') }}</a>
+                        <a href="{{ route('orders.create') }}" class="btn btn-primary">{{ __('orders.next_step') }}</a>
                     </div>
                 </div>
             </div>

@@ -42,3 +42,7 @@ Route::get('cart', 'CartsController@index')->name('carts.index');
 Route::get('promotions/show/{id}', 'PromotionsController@show')->name('promotions.show');
 
 Route::post('cart/addpromo', 'PromotionsController@addPromo')->name('cart.addpromo');
+
+Route::get('orders/create', 'OrdersController@create')->name('orders.create');
+
+Route::post('orders/store', 'OrdersController@store')->name('orders.store');

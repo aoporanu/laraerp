@@ -25,8 +25,13 @@ class Order extends ShopOrderModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|mixed
      */
-    public function hasOne()
+    public function Invoice()
     {
         return $this->hasOne(Invoice::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

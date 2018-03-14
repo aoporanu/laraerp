@@ -9,4 +9,5 @@ return [
     'tax' => 'Tax',
     'total' => 'Total',
     'Add promo' => 'Add promo',
+    'continue_shopping' => 'Continue shopping',
 ];

@@ -33,6 +33,14 @@ class Product extends Model implements Buyable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
+    /**
      * Get the identifier of the Buyable item.
      *
      * @return int|string

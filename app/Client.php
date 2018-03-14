@@ -19,4 +19,12 @@ class Client extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
+    }
 }

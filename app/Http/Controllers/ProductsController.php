@@ -119,6 +119,8 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
         Cart::add($product->id, $product->name, 55, $product->price)->associate(Product::class);
 
+        // mark the quantity of products in inventory table as on-hold
+
         return redirect()->route('carts.index')
             ->with(['status' => 'OK', 'message' => 'The product has been added to the cart']);
     }

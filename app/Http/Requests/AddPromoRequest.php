@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateOrder extends FormRequest
+class AddPromoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,12 +13,7 @@ class CreateOrder extends FormRequest
      */
     public function authorize()
     {
-        $user = Auth::user();
-        if($user->can('create-orders')) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->user()->hasRole('agent');
     }
 
     /**
@@ -28,9 +23,8 @@ class CreateOrder extends FormRequest
      */
     public function rules()
     {
-        dd(Cart::content());
-//        return [
-//            dd(Cart::content())
-//        ];
+        return [
+
+        ];
     }
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Inventory;
 use App\Promotion;
+use App\User;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PromotionsController extends Controller
 {
@@ -52,10 +54,6 @@ class PromotionsController extends Controller
     {
         $promotion = Promotion::findOrFail($id);
 
-//        dump($promotion->mechanism);
-
-        // get cart quantity for the given prod
-
         $qty = 0;
         $response = [];
         foreach(Cart::content() as $row) {
@@ -78,6 +76,13 @@ class PromotionsController extends Controller
             }
         }
         return response()->json($response);
+    }
+
+    public function addPromo(Request $request)
+    {
+        if(Auth::user()->hasRole('agent')) {
+            dd(Cart::content());
+        }
     }
 
     /**

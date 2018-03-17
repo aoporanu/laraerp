@@ -15,13 +15,7 @@
     <li><a href="{{ route('dashboard.charts') }}"> <i class="icon-grid"></i>{{ __('profile.stats') }} </a></li>
     <li><a href="{{ route('dashboard.clients') }}"> <i class="fa fa-bar-chart"></i>{{ __('profile.clients') }}</a></li>
     <li class="active"><a href="{{ route('dashboard.pastpaid') }}"> <i class="icon-padnote"></i>{{ __('profile.debtors') }}</a></li>
-    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Example dropdown </a>
-        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Page</a></li>
-        </ul>
-    </li>
+    <li><a href="{{ route('products.index') }}">{{ __('profile.products') }}</a></li>
     <li><a href="login.html"> <i class="icon-logout"></i>Login page </a></li>
 </ul><span class="heading">Extras</span>
 <ul class="list-unstyled">

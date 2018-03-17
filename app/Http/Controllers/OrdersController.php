@@ -43,6 +43,7 @@ class OrdersController extends Controller
             }
             $order->status = 'pending';
             $order->save();
+            DB::table('invoices')->where('client_id', '=', $client->id)->get(['created', 'due', 'cashed_in', 'last_cashed_in_date']);
         }
     }
 }

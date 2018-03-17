@@ -46,3 +46,9 @@ Route::post('cart/addpromo', 'PromotionsController@addPromo')->name('cart.addpro
 Route::get('orders/create', 'OrdersController@create')->name('orders.create');
 
 Route::post('orders/store', 'OrdersController@store')->name('orders.store');
+
+Route::get('my-charts', 'ProfileController@stats')->name('dashboard.charts');
+
+Route::get('clients', 'ProfileController@clients')->name('dashboard.clients');
+
+Route::get('debt', 'ProfileController@pastpaid')->name('dashboard.pastpaid');

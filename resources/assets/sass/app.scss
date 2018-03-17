@@ -4,13 +4,19 @@
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
+@import '~bootstrap/scss/bootstrap';
+
+@import '~jquery-ui/themes/base/all.css';
+
+@import "font.css";
+
+@import "style.default.css";
+
 // Variables
 @import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
 
-@import '~jquery-ui/themes/base/all.css';
 
 .navbar-laravel {
   background-color: #fff;

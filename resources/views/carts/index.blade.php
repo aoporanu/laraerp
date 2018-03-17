@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+    {{ dd(Cart::content()) }}
         <div class="row justify-content-center">
             <section class="no-padding-top">
                     <div class="container-fluid">
@@ -76,13 +77,21 @@
     <script type="text/javascript">
         $("#exampleModal").on("show.bs.modal", function(e) {
             let link = $(e.relatedTarget);
+            // console.info();
+            let id = $(e.relatedTarget).attr('id');
             $.getJSON(link.attr('href'), function (json) {
-                var form = '<form method="post" action="{{ route('cart.addpromo') }}">';
+                let form = '<form method="post" action="{{ route('cart.addpromo') }}">';
+                let i = 0;
                 form += '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
+                form += '<input type="hidden" name="id" value="'+ id +'" />';
                 $.each(json.promo, function() {
+                    i++;
                     // console.info(this.id);
-                    form += '<div class="form-group"><input type="text" class="spinner" value="0" />' +
-                        '<label for="spinner">' + this.name + '</label>' +
+                    // language=HTML
+                    form += '<div class="form-group">' +
+                        '<input type="text" class="spinner" name="promo[' + i + ']" value="0" />' +
+                        '<input type="hidden" name="promo[' + i + ']["name"] value="' + this.name + '" />' +
+                        '<label class="control-label" for="spinner">' + this.name + '</label>' +
                         '</div>';
                 });
                 form += '<div class="form-group"><button class="btn btn-primary" type="submit">{{ __("carts.Add promo") }}</button></div>';

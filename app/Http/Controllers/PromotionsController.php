@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddPromoRequest;
 use App\Inventory;
 use App\Promotion;
-use App\User;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PromotionsController extends Controller
 {
@@ -78,11 +77,23 @@ class PromotionsController extends Controller
         return response()->json($response);
     }
 
-    public function addPromo(Request $request)
+    /**
+     * @param AddPromoRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function addPromo(AddPromoRequest $request)
     {
-        if(Auth::user()->hasRole('agent')) {
-            dd(Cart::content());
+        $rowId = $request->get('id');
+        $options = [];
+        $i = 0;
+        // @TODO CartItemOptions gets added as empty array
+        foreach($request->get('promo') as $p) {
+            $i++;
+            $options[$i]['promo'] = Inventory::where([['type', '=', 'free'], ['name', '=', $p]])->first();
         }
+        Cart::update($rowId, ['options' => $options]);
+
+        return redirect()->route('carts.index')->with('message', 'Your promotions have been set');
     }
 
     /**

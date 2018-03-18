@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddPromoRequest;
 use App\Inventory;
+use App\Product;
 use App\Promotion;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PromotionsController extends Controller
 {
@@ -16,6 +18,7 @@ class PromotionsController extends Controller
      * Merge pentru un singur produs in parte, ar trebui facuta sa mearga
      * pentru tot cartul de cumparaturi
      * @param $id
+     * @param Request $request
      * @return array
      */
     public function show($id, Request $request)
@@ -46,17 +49,17 @@ class PromotionsController extends Controller
     }
 
     /**
-     * @param AddPromoRequest $request
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addPromo(AddPromoRequest $request)
+    public function addPromo(Request $request)
     {
         $rowId = $request->get('id');
-        $i = 0;
-        // @TODO CartItemOptions gets added as empty array
+        // @FIXED CartItemOptions gets added as empty array
+        DB::enableQueryLog();
         foreach($request->get('promo') as $p) {
-            $i++;
-            Cart::update($rowId, [Inventory::where([['type', '=', 'free'], ['name', '=', $p]])->first()]);
+            $promo = Inventory::where([['type', '=', 'free'], ['name', '=', $p['name']['value']]])->first();
+            Cart::update($rowId, ['options' => ['promo' => $p['name']['value'], 'qty' => $p['name']['cutie'], 'price' => 0.0]]);
         }
         return redirect()->route('carts.index')->with('message', 'Your promotions have been set');
     }

@@ -26,7 +26,7 @@ class AddPromoRequest extends FormRequest
         return [
             'id' => 'required',
             'promo.*.name' => 'required',
-            'promo.*.name.qty' => 'required'
+            'promo.*.name.cutie' => 'required|numeric'
         ];
     }
 }

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddPromoRequest;
 use App\Inventory;
-use App\Product;
 use App\Promotion;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -55,11 +53,12 @@ class PromotionsController extends Controller
     public function addPromo(Request $request)
     {
         $rowId = $request->get('id');
-        // @FIXED CartItemOptions gets added as empty array
+        /* @FIXED CartItemOptions gets added as empty array */
         DB::enableQueryLog();
         foreach($request->get('promo') as $p) {
             $promo = Inventory::where([['type', '=', 'free'], ['name', '=', $p['name']['value']]])->first();
             Cart::update($rowId, ['options' => ['promo' => $p['name']['value'], 'qty' => $p['name']['cutie'], 'price' => 0.0]]);
+            /* @TODO subtract cutie amt from qty field of inventory. */
         }
         return redirect()->route('carts.index')->with('message', 'Your promotions have been set');
     }

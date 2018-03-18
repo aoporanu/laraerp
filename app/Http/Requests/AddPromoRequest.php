@@ -25,7 +25,8 @@ class AddPromoRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'promo.*' => 'required'
+            'promo.*.name' => 'required',
+            'promo.*.name.qty' => 'required'
         ];
     }
 }

@@ -4,9 +4,9 @@
 @endsection
 
 @section('content')
-    {{ dd(Cart::content()) }}
+    {{--{{ dd(Cart::content()) }}--}}
         <div class="row justify-content-center">
-            <section class="no-padding-top">
+            <section class="padding-top">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
@@ -80,6 +80,7 @@
             // console.info();
             let id = $(e.relatedTarget).attr('id');
             $.getJSON(link.attr('href'), function (json) {
+                console.info(json);
                 let form = '<form method="post" action="{{ route('cart.addpromo') }}">';
                 let i = 0;
                 form += '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
@@ -89,8 +90,8 @@
                     // console.info(this.id);
                     // language=HTML
                     form += '<div class="form-group">' +
-                        '<input type="text" class="spinner" name="promo[' + i + ']" value="0" />' +
-                        '<input type="hidden" name="promo[' + i + ']["name"] value="' + this.name + '" />' +
+                        '<input type="text" class="spinner" name="promo[' + i + '][name][qty]" value="0" />' +
+                        '<input type="hidden" name="promo[' + i + '][name]" value="' + this.name + '" />' +
                         '<label class="control-label" for="spinner">' + this.name + '</label>' +
                         '</div>';
                 });

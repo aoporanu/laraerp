@@ -85,6 +85,7 @@
                 let i = 0;
                 form += '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
                 form += '<input type="hidden" name="id" value="'+ id +'" />';
+                form += '<input type="hidden" name="qty" id="qty" value="' + json.qty + '" />';
                 $.each(json.promo, function() {
                     i++;
                     // console.info(this.id);
@@ -97,6 +98,30 @@
                 });
                 form += '<div class="form-group"><button class="btn btn-primary" type="submit">{{ __("carts.Add promo") }}</button></div>';
                 form += "</form>";
+                let spinners = $('.spinner');
+                spinners.each(function() {
+                    let max = document.getElementById('qty');
+                    let value = Number($(this).text(), 10),
+                        availableTotal = max;
+                    $(this).empty().slider({
+                        value: 0,
+                        min: 0,
+                        max: max,
+                        range: "max",
+                        step: 1,
+                        animate: 100,
+                        disabled: (function(curMax) {
+                            if(curMax < 1) {
+                                return 1;
+                            }
+                            return 0;
+                        })($(this).siblings().attr('max')),
+                        stop: function(event, ui) {
+                            $(this).siblings().attr('value', ui.value);
+                            $(this).siblings().trigger('change');
+                        }
+                    });
+                });
                 $('.modal-body').html(form);
             });
         });

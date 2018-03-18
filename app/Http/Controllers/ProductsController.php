@@ -8,7 +8,6 @@ use App\Product;
 use App\Supplier;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -29,8 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $suppliers = Supplier::pluck('id', 'name');
-        $categories = Category::pluck('id', 'name');
+        $suppliers = (new Supplier)->pluck('id', 'name');
+        $categories = (new Category)->pluck('id', 'name');
         return view('products.create', ['suppliers' => $suppliers, 'categories' => $categories]);
     }
 
@@ -43,8 +42,9 @@ class ProductsController extends Controller
     public function store(StoreProduct $request)
     {
 //        dd($request->all());
-        $category = Category::findOrFail($request->get('category_id'));
-        $supplier = Supplier::find($request->get('supplier_id'));
+        $category = new Category();
+        $category->findOrFail($request->get('category_id'));
+        $supplier = (new Supplier)->find($request->get('supplier_id'));
 
         $product = new Product;
 
@@ -82,11 +82,9 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update()
     {
         return redirect()->route('products.index')->with('message', 'The product has been updated');
     }
@@ -117,7 +115,11 @@ class ProductsController extends Controller
     public function cart($id)
     {
         $product = Product::findOrFail($id);
-        Cart::add($product->id, $product->name, 55, $product->price)->associate(Product::class);
+        /** @noinspection PhpUndefinedFieldInspection */
+        /** @noinspection PhpUndefinedFieldInspection */
+        /** @noinspection PhpUndefinedFieldInspection */
+        /** @noinspection PhpUndefinedMethodInspection  */
+        Cart::add($product->id, $product->name, 1, $product->price)->associate(Product::class);
 
         // mark the quantity of products in inventory table as on-hold
 

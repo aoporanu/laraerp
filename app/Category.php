@@ -11,6 +11,9 @@ class Category extends Model
         'name'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function product()
     {
         return $this->hasMany(Product::class);

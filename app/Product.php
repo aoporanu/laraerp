@@ -5,6 +5,11 @@ namespace App;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed name
+ * @property mixed price
+ * @property int sku
+ */
 class Product extends Model implements Buyable
 {
     protected $itemRouteName = 'product';
@@ -68,5 +73,13 @@ class Product extends Model implements Buyable
     public function getBuyablePrice($options = null)
     {
         // TODO: Implement getBuyablePrice() method.
+    }
+
+    /**
+     * Returns array of all the products found in the inventory table.
+     */
+    public function inStock()
+    {
+
     }
 }

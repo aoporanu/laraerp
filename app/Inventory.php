@@ -22,4 +22,12 @@ class Inventory extends Model
         'lot',
         'for'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lot()
+    {
+        return $this->hasMany(Lot::class);
+    }
 }

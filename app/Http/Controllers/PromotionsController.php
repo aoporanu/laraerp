@@ -38,6 +38,7 @@ class PromotionsController extends Controller
                 $response['message'] = __('promotions.promo_price_for_product');
             } elseif($row->model->promo_price == '') {
 //                return the promotions array
+                /** @noinspection PhpDynamicAsStaticMethodCallInspection */
                 $promo = Inventory::where([['type', '=', 'free'], ['for', '=', $promotion->name]])->get();
                 $response['message'] = __('promotions.available_promotions');
                 $response['promo'] = $promo;

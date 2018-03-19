@@ -27,10 +27,14 @@
                                     <td>{{ $product->sku }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
-                                    <td></td>
+                                    <td>{{ $product->qty }}</td>
                                     <td>{{ $product->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('product.add.to.cart', ['id' => $product->id]) }}">Add to cart</a>
+                                        <a href="{{ route('inventory.add.product', ['id' => $product->id]) }}">{{ __('products.add_to_inventory') }}</a>
+                                        {{-- Only agents and operators can see this link --}}
+                                        @if(Auth::user() && (Auth::user()->hasRole('agent') || Auth::user()->hasRole('operator')))
+                                            <a href="{{ route('product.add.to.cart', ['id' => $product->id]) }}">{{ __('products.add_to_cart') }}</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -18,7 +18,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products.index', ['products' => Product::with('category')->get()]);
+        return view('products.index', ['products' => Product::with(['category', 'inventory'])->get()]);
     }
 
     /**
@@ -28,7 +28,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $suppliers = (new Supplier)->pluck('id', 'name');
+        /** @noinspection PhpUndefinedMethodInspection */
         $categories = (new Category)->pluck('id', 'name');
         return view('products.create', ['suppliers' => $suppliers, 'categories' => $categories]);
     }
@@ -43,7 +45,9 @@ class ProductsController extends Controller
     {
 //        dd($request->all());
         $category = new Category();
+        /** @noinspection PhpUndefinedMethodInspection */
         $category->findOrFail($request->get('category_id'));
+        /** @noinspection PhpUndefinedMethodInspection */
         $supplier = (new Supplier)->find($request->get('supplier_id'));
 
         $product = new Product;
@@ -52,6 +56,7 @@ class ProductsController extends Controller
         $product->price = $request->get('price');
         $product->sku = 10100008;
         $category->product()->save($product);
+        /** @noinspection PhpUndefinedMethodInspection */
         $supplier->products()->save($product);
 
         return redirect()->route('products.index')->with('message', 'The product has been saved');
@@ -114,6 +119,7 @@ class ProductsController extends Controller
      */
     public function cart($id)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $product = Product::findOrFail($id);
         /** @noinspection PhpUndefinedFieldInspection */
         /** @noinspection PhpUndefinedFieldInspection */

@@ -16,6 +16,14 @@ class Product extends Model implements Buyable
 
     protected $itemRouteParams = ['slug'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
+    }
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

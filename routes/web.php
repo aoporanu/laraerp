@@ -54,3 +54,5 @@ Route::get('clients', 'ProfileController@clients')->name('dashboard.clients');
 Route::get('debt', 'ProfileController@pastpaid')->name('dashboard.pastpaid');
 
 Route::get('inventory/add-product', 'InventoryController@create')->name('inventory.add.product');
+
+Route::post('cart/add', 'ProductsController@addToCart')->name('add.product.cart');

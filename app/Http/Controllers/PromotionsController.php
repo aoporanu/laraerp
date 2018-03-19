@@ -7,7 +7,6 @@ use App\Promotion;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PromotionsController extends Controller
 {
@@ -16,15 +15,16 @@ class PromotionsController extends Controller
      * Merge pentru un singur produs in parte, ar trebui facuta sa mearga
      * pentru tot cartul de cumparaturi
      * @param $id
-     * @param Request $request
      * @return array
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $promotion = Promotion::findOrFail($id);
 
         $qty = 0;
         $response = [];
+        /** @noinspection PhpUndefinedMethodInspection */
         foreach(Cart::content() as $row) {
             // round it down to mechanism
             /** @var CartItem $row */
@@ -39,6 +39,7 @@ class PromotionsController extends Controller
             } elseif($row->model->promo_price == '') {
 //                return the promotions array
                 /** @noinspection PhpDynamicAsStaticMethodCallInspection */
+                /** @noinspection PhpUndefinedMethodInspection */
                 $promo = Inventory::where([['type', '=', 'free'], ['for', '=', $promotion->name]])->get();
                 $response['message'] = __('promotions.available_promotions');
                 $response['promo'] = $promo;
@@ -54,12 +55,18 @@ class PromotionsController extends Controller
     public function addPromo(Request $request)
     {
         $rowId = $request->get('id');
-        /* @FIXED CartItemOptions gets added as empty array */
-        DB::enableQueryLog();
+        /** @var Request $p */
         foreach($request->get('promo') as $p) {
+            /** @noinspection PhpUndefinedMethodInspection */
             $promo = Inventory::where([['type', '=', 'free'], ['name', '=', $p['name']['value']]])->first();
+            /** @noinspection PhpUndefinedMethodInspection */
             Cart::update($rowId, ['options' => ['promo' => $p['name']['value'], 'qty' => $p['name']['cutie'], 'price' => 0.0]]);
-            /* @TODO subtract cutie amt from qty field of inventory. */
+
+            $qty = $promo->qty - $p['name']['cutie'];
+
+            $promo->qty = $qty;
+            /** @noinspection PhpUndefinedMethodInspection */
+            $promo->save();
         }
         return redirect()->route('carts.index')->with('message', 'Your promotions have been set');
     }

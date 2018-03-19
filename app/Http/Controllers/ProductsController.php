@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\AddToCartRequest;
 use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Supplier;
@@ -113,6 +114,7 @@ class ProductsController extends Controller
     }
 
     /**
+     * Should only display the modal with the product.
      *
      * @param $id
      * @return \Illuminate\Http\Response
@@ -122,14 +124,26 @@ class ProductsController extends Controller
         /** @noinspection PhpUndefinedMethodInspection */
         $product = Product::findOrFail($id);
         /** @noinspection PhpUndefinedFieldInspection */
+
+        // mark the quantity of products in inventory table as on-hold
+        return view('carts.partials.add')->with('product', $product);
+    }
+
+    /**
+     * @param AddToCartRequest $request
+     */
+    public function addToCart(AddToCartRequest $request)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $product = Product::findOrFail($request->get('id'));
         /** @noinspection PhpUndefinedFieldInspection */
         /** @noinspection PhpUndefinedFieldInspection */
         /** @noinspection PhpUndefinedMethodInspection  */
-        Cart::add($product->id, $product->name, 1, $product->price)->associate(Product::class);
-
-        // mark the quantity of products in inventory table as on-hold
-
-        return redirect()->route('carts.index')
-            ->with(['status' => 'OK', 'message' => 'The product has been added to the cart']);
+        Cart::add($product->id, $product->name, $request->get('qty'), $product->price)->associate(Product::class);
+        $qty = $product->qty - $request->get('qty');
+        // taking care of the product quantity
+        $product->qty = $qty;
+        /** @noinspection PhpUndefinedMethodInspection */
+        $product->save();
     }
 }

@@ -10,4 +10,5 @@ return [
     'total' => 'Total',
     'Add promo' => 'Add promo',
     'continue_shopping' => 'Continue shopping',
+    'product_name' => 'Product',
 ];
